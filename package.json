@@ -7,7 +7,7 @@
     "build": "tsc && shx cp -r src/templates dist"
   },
   "bin": {
-    "avrcoelho-react-cli": "./dist/index.js"
+    "myreact-cli": "./dist/index.js"
   },
   "license": "MIT",
   "devDependencies": {
