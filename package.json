@@ -1,0 +1,29 @@
+{
+  "name": "react-clean",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc && shx cp -r src/templates dist"
+  },
+  "bin": {
+    "avrcoelho-react-cli": "./dist/index.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/ejs": "^3.0.6",
+    "@types/inquirer": "^7.3.1",
+    "@types/node": "^15.0.2",
+    "@types/shelljs": "^0.8.8",
+    "@types/yargs": "^16.0.1",
+    "shx": "^0.3.3",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
+  },
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "inquirer": "^8.0.0",
+    "shelljs": "^0.8.4",
+    "yargs": "^17.0.1"
+  }
+}

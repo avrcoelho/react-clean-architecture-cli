@@ -1,0 +1,88 @@
+{
+  "parser": "@typescript-eslint/parser",
+
+  "plugins": [
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "@typescript-eslint",
+    "prettier"
+  ],
+
+  "settings": {
+    "react": { "version": "detect" }
+  },
+
+  "env": {
+    "jest": true,
+    "browser": true
+  },
+
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true
+    }
+  },
+
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
+  ],
+
+  "rules": {
+    "react/jsx-uses-react": "off",
+    "react/react-in-jsx-scope": "off",
+
+    // Spacing
+    "no-mixed-spaces-and-tabs": "error",
+    "no-tabs": "error",
+
+    // Semicolons
+    "semi": ["error", "always"],
+    "semi-spacing": "warn",
+    "no-extra-semi": "error",
+
+    // General Syntax
+    "prefer-arrow-callback": "warn",
+    "no-extra-boolean-cast": "off",
+
+    // React
+    "react/prop-types": "error",
+    "react-hooks/rules-of-hooks": "error",
+
+    // Code smells
+    "max-lines": ["warn", { "max": 150, "skipBlankLines": true, "skipComments": true}],
+    "max-statements": ["warn", { "max": 15 }],
+    "array-callback-return": ["error", { "checkForEach": true }],
+    "max-nested-callbacks": ["warn", { "max": 5 }],
+    "no-console": "error",
+
+    // Typescript
+    "@typescript-eslint/explicit-module-boundary-types": "off"
+  },
+
+  "overrides": [
+    {
+      // Disable prop types check on TypeScript files since props rely on Interfaces
+      "files": ["*.tsx"],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    },
+    {
+      // Empty functions and long files are acceptable on tests
+      "files": ["*.spec.js", "*.spec.jsx", "*.spec.ts", "*.spec.tsx"],
+      "rules": {
+        "@typescript-eslint/no-empty-function": "off",
+        "max-lines": "off",
+        "max-statements": "off"
+      }
+    }
+  ]
+}
