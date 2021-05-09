@@ -1,6 +1,6 @@
 # React Clean Architecture CLI
 
-Create an App React with clean architecture.
+Create an App React with clean architecture and Typescript.
 Jest, styled components and webpack 5 with federation module for microfrontend already configured.
 
 ## Install
