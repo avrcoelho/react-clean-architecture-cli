@@ -12,12 +12,12 @@ const QUESTIONS = [
   {
     name: "name",
     type: "input",
-    message: "Project name:",
-    when: () => !yargs.argv["name"],
+    message: "App name:",
+    when: () => !yargs.argv["name"] && !yargs.argv._[0],
     validate: (input: string) => {
       if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
       else
-        return "Project name may only include letters, numbers, underscores and hashes.";
+        return "App name may only include letters, numbers, underscores and hashes.";
     },
   },
 ];
@@ -44,8 +44,11 @@ console.log(
 -------------------------------------
 `)
 );
+
 inquirer.prompt(QUESTIONS).then((answers) => {
-  answers = Object.assign({}, answers, yargs.argv);
+  answers = Object.assign({}, answers, {
+    name: yargs.argv["name"] || yargs.argv._[0],
+  });
 
   const projectChoice = "clean-architecture";
   const projectName = answers["name"];
