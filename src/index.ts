@@ -46,6 +46,13 @@ export interface CliOptions {
   config: TemplateConfig;
 }
 
+console.log(
+  chalk.blue(`
+-------------------------------------
+ andrecoelho.dev | Software Enginner
+-------------------------------------
+`)
+);
 inquirer.prompt(QUESTIONS).then((answers) => {
   answers = Object.assign({}, answers, yargs.argv);
 
