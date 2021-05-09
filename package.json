@@ -1,13 +1,36 @@
 {
   "name": "react-clean",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "keywords": [
+    "react",
+    "javascript",
+    "typescript",
+    "cli",
+    "clean architecture",
+    "clean",
+    "architecture",
+    "webpack",
+    "styled-components",
+    "node",
+    "jest",
+    "testing-library"
+  ],
+  "author": "André Coelho",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/avrcoelho/react-clean-architecture-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/avrcoelho/react-clean-architecture-cli/issues"
+  },
+  "homepage": "https://github.com/avrcoelho/react-clean-architecture-cli",
   "scripts": {
     "start": "ts-node src/index.ts",
     "build": "tsc && shx cp -r src/templates dist"
   },
   "bin": {
-    "myreact-cli": "./dist/index.js"
+    "react-clean-architecture": "./dist/index.js"
   },
   "license": "MIT",
   "devDependencies": {

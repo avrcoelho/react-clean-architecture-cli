@@ -8,16 +8,7 @@ import * as template from "./utils/template";
 import * as chalk from "chalk";
 import * as yargs from "yargs";
 
-const CHOICES = fs.readdirSync(path.join(__dirname, "templates"));
-
 const QUESTIONS = [
-  {
-    name: "template",
-    type: "list",
-    message: "What project template would you like to generate?",
-    choices: CHOICES,
-    when: () => !yargs.argv["template"],
-  },
   {
     name: "name",
     type: "input",
@@ -56,7 +47,7 @@ console.log(
 inquirer.prompt(QUESTIONS).then((answers) => {
   answers = Object.assign({}, answers, yargs.argv);
 
-  const projectChoice = answers["template"];
+  const projectChoice = "clean-architecture";
   const projectName = answers["name"];
   const templatePath = path.join(__dirname, "templates", projectChoice);
   const tartgetPath = path.join(CURR_DIR, projectName);
