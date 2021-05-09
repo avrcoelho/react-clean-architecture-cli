@@ -1,7 +1,7 @@
 {
   "name": "react-clean-architecture-cli",
   "description": "React.js Clean Architecture application",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "dist/index.js",
   "keywords": [
     "react",
