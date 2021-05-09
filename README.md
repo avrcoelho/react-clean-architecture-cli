@@ -6,13 +6,13 @@ Jest, styled components and webpack 5 with federation module for microfrontend a
 ## Install
 
 ```shell
-npm install -g react-clean-architeture-cli
+npm install -g react-clean-architecture-cli
 ```
 
 or
 
 ```shell
-yarn global add react-clean-architeture-cli
+yarn global add react-clean-architecture-cli
 ```
 
 ## Creating an App
