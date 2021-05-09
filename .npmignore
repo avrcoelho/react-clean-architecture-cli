@@ -1,5 +1,5 @@
 node_modules
-src
+./src
 tsconfig.json
 .gitignore
 yarn.lock
