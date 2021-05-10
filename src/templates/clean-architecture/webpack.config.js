@@ -66,7 +66,7 @@ module.exports = (env, argv) => {
         filename: 'index.html',
       }),
       new ModuleFederationPlugin({
-        name,
+        name: '<%= microName %>',
         filename: 'remoteEntry.js',
         exposes: {
           './App': './src/presentation/App',
