@@ -23,7 +23,8 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    '\\.(css|svg)': '<rootDir>/__mocks__/emptyFileMock.js',
+    '\\.(css|png|jpe?g)$': '<rootDir>/__mocks__/emptyFileMock.js',
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
     '@/(.*)': '<rootDir>/src/$1',
   },
   testMatch: ['<rootDir>/src/**/__tests__/**/*.spec.{ts,tsx}'],
