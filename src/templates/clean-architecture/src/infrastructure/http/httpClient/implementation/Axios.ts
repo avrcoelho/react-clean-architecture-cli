@@ -5,14 +5,14 @@ import {
   IHttpClientGetDTO,
   IHttpClientPatchDTO,
   IHttpClientPostDTO,
-  IHttpClientPutDTO
+  IHttpClientPutDTO,
 } from '../dtos/IHttpClient.dto';
 import IHttpClientModel from '../models/IHttpClient.model';
 
 class AxiosHttpClient implements IHttpClientModel {
-  private baseUrl: string | undefined;
+  private readonly baseUrl: string | undefined;
 
-  private axiosInstance: AxiosInstance;
+  private readonly axiosInstance: AxiosInstance;
 
   constructor() {
     this.axiosInstance = axios.create({});
@@ -22,13 +22,13 @@ class AxiosHttpClient implements IHttpClientModel {
   public get<TResponse>({
     url,
     params = null,
-    headers = null
+    headers = null,
   }: IHttpClientGetDTO): Promise<AxiosResponse<TResponse>> {
     return this.axiosInstance({
       method: 'GET',
       url: `${this.baseUrl}${url}`,
       params,
-      headers
+      headers,
     });
   }
 
@@ -36,14 +36,14 @@ class AxiosHttpClient implements IHttpClientModel {
     url,
     params = null,
     data = null,
-    headers = null
+    headers = null,
   }: IHttpClientPostDTO): Promise<AxiosResponse<TResponse>> {
     return this.axiosInstance({
       method: 'POST',
       url: `${this.baseUrl}${url}`,
       params,
       data,
-      headers
+      headers,
     });
   }
 
@@ -51,14 +51,14 @@ class AxiosHttpClient implements IHttpClientModel {
     url,
     params = null,
     data = null,
-    headers = null
+    headers = null,
   }: IHttpClientPutDTO): Promise<AxiosResponse<TResponse>> {
     return this.axiosInstance({
       method: 'PUT',
       url: `${this.baseUrl}${url}`,
       params,
       data,
-      headers
+      headers,
     });
   }
 
@@ -66,27 +66,27 @@ class AxiosHttpClient implements IHttpClientModel {
     url,
     params = null,
     data = null,
-    headers = null
+    headers = null,
   }: IHttpClientPatchDTO): Promise<AxiosResponse<TResponse>> {
     return this.axiosInstance({
       method: 'PUT',
       url: `${this.baseUrl}${url}`,
       params,
       data,
-      headers
+      headers,
     });
   }
 
   public delete<TResponse>({
     url,
     params = null,
-    headers = null
+    headers = null,
   }: IHttpClientDeleteDTO): Promise<AxiosResponse<TResponse>> {
     return this.axiosInstance({
       method: 'DELETE',
       url: `${this.baseUrl}${url}`,
       params,
-      headers
+      headers,
     });
   }
 }
