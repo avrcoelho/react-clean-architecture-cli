@@ -171,12 +171,8 @@ function createDirectoryContents(
 
     if (stats.isFile()) {
       let contents = fs.readFileSync(origFilePath, "utf8");
-
-      if (file !== "index.html") {
-        const microName = projectName.replace(/[^a-zA-Z0-9]/g, "");
-        contents = template.render(contents, { projectName, microName });
-      }
-
+      const microName = projectName.replace(/[^a-zA-Z0-9]/g, "");
+      contents = template.render(contents, { projectName, microName });
       const writePath = path.join(CURR_DIR, projectName, file);
       fs.writeFileSync(writePath, contents, "utf8");
     } else if (stats.isDirectory()) {
