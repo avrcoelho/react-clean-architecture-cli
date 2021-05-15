@@ -3,9 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const NodePolyfillPlugin = require('node-polyfill-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
-const { dependencies, name } = require('./package.json');
 
 module.exports = (env, argv) => {
   const isProduction = argv['mode'] === 'production';
@@ -13,27 +11,36 @@ module.exports = (env, argv) => {
   return {
     entry: ['babel-polyfill', './src/presentation/index'],
     output: {
-      publicPath: '',
+      publicPath: 'auto',
       path: path.join(__dirname, 'dist'),
-      filename: '[name].bundle.[chunkhash].js',
+      filename: '[name].[contenthash].js',
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js', '.json'],
+      extensions: ['.ts', '.tsx', '.js', '.svg'],
       alias: {
         '@': path.resolve(__dirname, 'src'),
       },
     },
     module: {
       rules: [
-        { loader: 'babel-loader', test: /\.js$/, exclude: /node_modules/ },
-        { loader: 'ts-loader', test: /\.tsx?$/, exclude: /node_modules/ },
         {
-          test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          test: /bootstrap\.tsx$/,
+          loader: 'bundle-loader',
+          options: {
+            lazy: true,
+          },
         },
         {
-          test: /\.svg$/,
-          use: ['@svgr/webpack', 'url-loader'],
+          test: /\.tsx?$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/,
+          options: {
+            presets: ['@babel/preset-react', '@babel/preset-typescript'],
+          },
+        },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(png|jpe?g)$/,
@@ -48,6 +55,10 @@ module.exports = (env, argv) => {
           ],
         },
         {
+          test: /\.svg$/,
+          use: ['@svgr/webpack', 'url-loader'],
+        },
+        {
           test: /\.(eot|ttf|woff|woff2)$/,
           loader: 'file-loader',
           options: {
@@ -58,38 +69,20 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new NodePolyfillPlugin(),
-      new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' }),
       new HtmlWebpackPlugin({
-        inject: false,
-        hash: true,
         template: './public/index.html',
-        filename: 'index.html',
       }),
       new ModuleFederationPlugin({
         name: '<%= microName %>',
         filename: 'remoteEntry.js',
         exposes: {
-          './App': './src/presentation/App',
+          '.': './src/presentation/App',
         },
-        shared: {
-          react: {
-            singleton: true,
-            eager: true,
-            requiredVersion: dependencies.react,
-          },
-          'react-dom': {
-            singleton: true,
-            eager: true,
-            requiredVersion: dependencies['react-dom'],
-          },
-        },
+        remotes: {},
+        shared: [{ react: { singleton: true } }],
       }),
       new CleanWebpackPlugin(),
     ],
-
-    optimization: {
-      runtimeChunk: 'single',
-    },
 
     devtool: isProduction ? false : 'eval-cheap-module-source-map',
 
