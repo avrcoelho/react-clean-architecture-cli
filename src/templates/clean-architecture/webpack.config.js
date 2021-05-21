@@ -67,7 +67,7 @@ module.exports = (env, argv) => {
           '.': './src/presentation/App',
         },
         remotes: {},
-        shared: [{ react: { singleton: true } }],
+        shared: [{ react: { singleton: true, eager: true } }],
       }),
       new CleanWebpackPlugin(),
     ],
