@@ -17,10 +17,19 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.svg'],
-      alias: { '@': path.resolve(__dirname, 'src') },
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+      },
     },
     module: {
       rules: [
+        {
+          test: /bootstrap\.tsx$/,
+          loader: 'bundle-loader',
+          options: {
+            lazy: true,
+          },
+        },
         {
           test: /\.tsx?$/,
           loader: 'babel-loader',
@@ -67,7 +76,7 @@ module.exports = (env, argv) => {
           '.': './src/presentation/App',
         },
         remotes: {},
-        shared: [{ react: { singleton: true, eager: true } }],
+        shared: [{ react: { singleton: true } }],
       }),
       new CleanWebpackPlugin(),
     ],
